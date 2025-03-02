@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 text-center text-2xl font-bold shadow-lg">
+        Social Media Dashboard TWITTER<button type="button" class="home-button" onclick="window.location.href='home.html'"> GoBackHome </button>
+    </header>
+    
+    <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="twi.jpg" ALT=TWITTER height:100px; width:100px;></img src>
+            <h2 class="text-lg font-semibold">TWITTER</h2>
+            <p class="text-2xl font-bold">44</p>
+            <p class="text-gray-600">threads</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <center><img src="twilik.jpg" ALT="LIKES" height:50px; width:50px; ></img src></center>
+            <h2 class="text-lg font-semibold">likes</h2>
+            <p class="text-2xl font-bold">1,284</p>
+            <p class="text-gray-600"></p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <center><img src="twicmt.jpg" ALT=COMMENTS height:50px; width:50px; ></img src></center>
+            <h2 class="text-lg font-semibold">comments</h2>
+            <p class="text-2xl font-bold">1,004</p>
+            <p class="text-gray-600"></p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <center><img src="twifol.jpg" alt=follwers height:50px; width:50px; ></img src></center>
+            <h2 class="text-lg font-semibold">followers</h2>
+            <p class="text-2xl font-bold">35,134</p>
+            <p class="text-gray-600">Followers gained</p>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">TWITTER Daily Reach (90 Days)</h2>
+            <canvas id="facebookChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">TWITTER Channel Views</h2>
+            <canvas id="youtubeChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">subscribers and non-subscribers</h2>
+            <canvas id=""></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Shares Shares</h2>
+            <p class="text-2xl font-bold">155</p>
+            <p class="text-green-600">⬆ 18% vs last month</p>
+        </div>
+    </div>
+    <script>
+        const facebookCtx = document.getElementById('facebookChart').getContext('2d');
+        new Chart(facebookCtx, {
+            type: 'line',
+            data: {
+                labels: ['Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Daily Reach',
+                    data: [5000, 15000, 20000],
+                    borderColor: 'rgba(139, 92, 246, 1)',
+                    borderWidth: 3,
+                    fill: false
+                }]
+            }
+        });
+
+        const youtubeCtx = document.getElementById('youtubeChart').getContext('2d');
+        new Chart(youtubeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'Views',
+                    data: [1200, 1000, 800, 1400, 1600],
+                    backgroundColor: 'rgba(255, 159, 64, 1)'
+                }]
+            }
+        });
+
+        const linkedinCtx = document.getElementById('linkedinChart').getContext('2d');
+        new Chart(linkedinCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [
+                    {
+                        label: 'Clicks',
+                        data: [400, 600, 700, 800, 900],
+                        backgroundColor: 'rgba(54, 162, 235, 1)'
+                    },
+                    {
+                        label: 'Likes',
+                        data: [300, 500, 600, 700, 800],
+                        backgroundColor: 'rgba(255, 99, 132, 1)'
+                    }
+                ]
+            }
+        });
+    </script>
+    <button type="button" class="home-button" onclick="window.location.href='home.html'"> GoBackHome </button>
+</body>
+</html>
