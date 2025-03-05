@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .home-button {
+    margin-top: 1rem;
+    width: 300px;
+    height: 60px;
+    padding: 10px;
+    background: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    transition: background 0.3s ease;
+}
+
+.home-button:hover {
+    background: #45a049; /* Darker green on hover */
+}
+
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 text-center text-2xl font-bold shadow-lg">
+        YouTube Dashboard
+        <button type="button" class="home-button" onclick="window.location.href='home.html'"> GoBackHome </button>
+    </header>
+    
+    <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- YouTube Metrics Cards -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="Y2B.jpg" alt="YouTube" height="50px" width="50px"></img>
+            <h2 class="text-lg font-semibold">YouTube</h2>
+            <p class="text-2xl font-bold">120</p>
+            <p class="text-gray-600">videos</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="ulik.jpg" alt="LIKES" height="50px" width="50px"></img>
+            <h2 class="text-lg font-semibold">likes</h2>
+            <p class="text-2xl font-bold">5,284</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="cmt.jpg" alt="COMMENTS" height="50px" width="50px"></img>
+            <h2 class="text-lg font-semibold">comments</h2>
+            <p class="text-2xl font-bold">2,004</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="sub.jpg" alt="SUBSCRIBERS" height="50px" width="50px"></img>
+            <h2 class="text-lg font-semibold">subscribers</h2>
+            <p class="text-2xl font-bold">50,134</p>
+            <p class="text-gray-600">Subscribers gained</p>
+        </div>
+        
+        <!-- YouTube Charts -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">YouTube Daily Views (90 Days)</h2>
+            <canvas id="youtubeLineChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">YouTube Monthly Views</h2>
+            <canvas id="youtubeBarChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">YouTube Likes and Comments</h2>
+            <canvas id="youtubeLikesCommentsChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Shares</h2>
+            <p class="text-2xl font-bold">355</p>
+            <p class="text-green-600">⬆ 22% vs last month</p>
+        </div>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // YouTube Line Chart (Daily Views)
+        const youtubeLineCtx = document.getElementById('youtubeLineChart').getContext('2d');
+        new Chart(youtubeLineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Apr', 'May', 'Jun'], // Months for YouTube data
+                datasets: [{
+                    label: 'Daily Views',
+                    data: [10000, 25000, 30000], // YouTube daily views data
+                    borderColor: 'rgba(255, 99, 132, 1)', // Red color
+                    borderWidth: 3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'YouTube Daily Views'
+                    }
+                }
+            }
+        });
+
+        // YouTube Bar Chart (Monthly Views)
+        const youtubeBarCtx = document.getElementById('youtubeBarChart').getContext('2d');
+        new Chart(youtubeBarCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for YouTube data
+                datasets: [{
+                    label: 'Views',
+                    data: [5000, 7000, 6000, 9000, 12000], // YouTube monthly views data
+                    backgroundColor: 'rgba(54, 162, 235, 1)' // Blue color
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'YouTube Monthly Views'
+                    }
+                }
+            }
+        });
+
+        // YouTube Bar Chart (Likes and Comments)
+        const youtubeLikesCommentsCtx = document.getElementById('youtubeLikesCommentsChart').getContext('2d');
+        new Chart(youtubeLikesCommentsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for YouTube data
+                datasets: [
+                    {
+                        label: 'Likes',
+                        data: [1000, 1500, 2000, 2500, 3000], // YouTube likes data
+                        backgroundColor: 'rgba(255, 159, 64, 1)' // Orange color
+                    },
+                    {
+                        label: 'Comments',
+                        data: [500, 800, 1200, 1500, 1800], // YouTube comments data
+                        backgroundColor: 'rgba(75, 192, 192, 1)' // Teal color
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'YouTube Likes and Comments'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

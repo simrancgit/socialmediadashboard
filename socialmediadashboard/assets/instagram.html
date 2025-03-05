@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .home-button {
+    margin-top: 1rem;
+    width: 300px;
+    height: 60px;
+    padding: 10px;
+    background: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    transition: background 0.3s ease;
+}
+
+.home-button:hover {
+    background: #45a049; /* Darker green on hover */
+}
+
+    </style>
+   
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 text-center text-2xl font-bold shadow-lg">
+        Instagram Dashboard
+        <button type="button" class="home-button" onclick="window.location.href='home.html'"> GoBackHome </button>
+    </header>
+    
+    <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Instagram Metrics Cards -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="ins.jpg" alt="Instagram" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">Instagram</h2>
+            <p class="text-2xl font-bold">320</p>
+            <p class="text-gray-600">posts</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="inslik.jpg" alt="LIKES" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">likes</h2>
+            <p class="text-2xl font-bold">15,284</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="inscmt.jpg" alt="COMMENTS" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">comments</h2>
+            <p class="text-2xl font-bold">3,004</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="insfol.jpg" alt="FOLLOWERS" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">followers</h2>
+            <p class="text-2xl font-bold">75,134</p>
+            <p class="text-gray-600">Followers gained</p>
+        </div>
+        
+        <!-- Instagram Charts -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Instagram Daily Reach (90 Days)</h2>
+            <canvas id="instagramLineChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Instagram Monthly Engagement</h2>
+            <canvas id="instagramBarChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Instagram Likes and Comments</h2>
+            <canvas id="instagramLikesCommentsChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Shares</h2>
+            <p class="text-2xl font-bold">455</p>
+            <p class="text-green-600">⬆ 25% vs last month</p>
+        </div>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Instagram Line Chart (Daily Reach)
+        const instagramLineCtx = document.getElementById('instagramLineChart').getContext('2d');
+        new Chart(instagramLineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Apr', 'May', 'Jun'], // Months for Instagram data
+                datasets: [{
+                    label: 'Daily Reach',
+                    data: [20000, 35000, 40000], // Instagram daily reach data
+                    borderColor: 'rgba(255, 99, 132, 1)', // Red color
+                    borderWidth: 3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Instagram Daily Reach'
+                    }
+                }
+            }
+        });
+
+        // Instagram Bar Chart (Monthly Engagement)
+        const instagramBarCtx = document.getElementById('instagramBarChart').getContext('2d');
+        new Chart(instagramBarCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for Instagram data
+                datasets: [{
+                    label: 'Engagement',
+                    data: [8000, 12000, 10000, 15000, 18000], // Instagram monthly engagement data
+                    backgroundColor: 'rgba(75, 192, 192, 1)' // Teal color
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Instagram Monthly Engagement'
+                    }
+                }
+            }
+        });
+
+        // Instagram Bar Chart (Likes and Comments)
+        const instagramLikesCommentsCtx = document.getElementById('instagramLikesCommentsChart').getContext('2d');
+        new Chart(instagramLikesCommentsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for Instagram data
+                datasets: [
+                    {
+                        label: 'Likes',
+                        data: [5000, 7000, 6000, 9000, 12000], // Instagram likes data
+                        backgroundColor: 'rgba(255, 159, 64, 1)' // Orange color
+                    },
+                    {
+                        label: 'Comments',
+                        data: [1000, 1500, 2000, 2500, 3000], // Instagram comments data
+                        backgroundColor: 'rgba(54, 162, 235, 1)' // Blue color
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Instagram Likes and Comments'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

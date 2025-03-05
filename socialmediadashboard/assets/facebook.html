@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .home-button {
+    margin-top: 1rem;
+    width: 300px;
+    height: 60px;
+    padding: 10px;
+    background: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    transition: background 0.3s ease;
+}
+
+.home-button:hover {
+    background: #45a049; /* Darker green on hover */
+}
+
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 text-center text-2xl font-bold shadow-lg">
+        Social Media Dashboard FACEBOOK
+        <button type="button" class="home-button" onclick="window.location.href='home.html'"> GoBackHome </button>
+    </header>
+    
+    <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Facebook Metrics Cards -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="fb.jpg" alt="FACEBOOK" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">Facebook</h2>
+            <p class="text-2xl font-bold">44</p>
+            <p class="text-gray-600">vlogs</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="fblik.jpg" alt="LIKES" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">likes</h2>
+            <p class="text-2xl font-bold">1,284</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="fbcmt.jpg" alt="COMMENTS" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">comments</h2>
+            <p class="text-2xl font-bold">1,004</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="fbfol.jpg" alt="FOLLOWERS" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">followers</h2>
+            <p class="text-2xl font-bold">35,134</p>
+            <p class="text-gray-600">Followers gained</p>
+        </div>
+        
+        <!-- Facebook Charts -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Facebook Daily Reach (90 Days)</h2>
+            <canvas id="facebookLineChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Facebook Monthly Views</h2>
+            <canvas id="facebookBarChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Facebook Clicks and Likes</h2>
+            <canvas id="facebookClicksLikesChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Shares</h2>
+            <p class="text-2xl font-bold">155</p>
+            <p class="text-green-600">⬆ 18% vs last month</p>
+        </div>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Facebook Line Chart (Daily Reach)
+        const facebookLineCtx = document.getElementById('facebookLineChart').getContext('2d');
+        new Chart(facebookLineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Apr', 'May', 'Jun'], // Months for Facebook data
+                datasets: [{
+                    label: 'Daily Reach',
+                    data: [5000, 15000, 20000], // Facebook daily reach data
+                    borderColor: 'rgba(139, 92, 246, 1)', // Purple color
+                    borderWidth: 3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Facebook Daily Reach'
+                    }
+                }
+            }
+        });
+
+        // Facebook Bar Chart (Views)
+        const facebookBarCtx = document.getElementById('facebookBarChart').getContext('2d');
+        new Chart(facebookBarCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for Facebook data
+                datasets: [{
+                    label: 'Views',
+                    data: [1200, 1000, 800, 1400, 1600], // Facebook views data
+                    backgroundColor: 'rgba(255, 159, 64, 1)' // Orange color
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Facebook Monthly Views'
+                    }
+                }
+            }
+        });
+
+        // Facebook Bar Chart (Clicks and Likes)
+        const facebookClicksLikesCtx = document.getElementById('facebookClicksLikesChart').getContext('2d');
+        new Chart(facebookClicksLikesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for Facebook data
+                datasets: [
+                    {
+                        label: 'Clicks',
+                        data: [400, 600, 700, 800, 900], // Facebook clicks data
+                        backgroundColor: 'rgba(54, 162, 235, 1)' // Blue color
+                    },
+                    {
+                        label: 'Likes',
+                        data: [300, 500, 600, 700, 800], // Facebook likes data
+                        backgroundColor: 'rgba(255, 99, 132, 1)' // Red color
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Facebook Clicks and Likes'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

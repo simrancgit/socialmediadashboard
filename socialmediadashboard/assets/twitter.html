@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .home-button {
+    margin-top: 1rem;
+    width: 300px;
+    height: 60px;
+    padding: 10px;
+    background: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    transition: background 0.3s ease;
+}
+
+.home-button:hover {
+    background: #45a049; /* Darker green on hover */
+}
+
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 text-center text-2xl font-bold shadow-lg">
+        Twitter Dashboard
+        <button type="button" class="home-button" onclick="window.location.href='home.html'"> GoBackHome </button>
+    </header>
+    
+    <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Twitter Metrics Cards -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="twi.jpg" alt="Twitter" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">Twitter</h2>
+            <p class="text-2xl font-bold">1,200</p>
+            <p class="text-gray-600">tweets</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="twilik.jpg" alt="LIKES" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">likes</h2>
+            <p class="text-2xl font-bold">12,284</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="twicmt.jpg" alt="RETWEETS" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">retweets</h2>
+            <p class="text-2xl font-bold">8,004</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all">
+            <img src="twifol.jpg" alt="FOLLOWERS" height="50px" width="50px">
+            <h2 class="text-lg font-semibold">followers</h2>
+            <p class="text-2xl font-bold">75,134</p>
+            <p class="text-gray-600">Followers gained</p>
+        </div>
+        
+        <!-- Twitter Charts -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Twitter Daily Engagement (90 Days)</h2>
+            <canvas id="twitterLineChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Twitter Monthly Engagement</h2>
+            <canvas id="twitterBarChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Twitter Likes and Retweets</h2>
+            <canvas id="twitterLikesRetweetsChart"></canvas>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg col-span-2">
+            <h2 class="text-lg font-semibold">Mentions</h2>
+            <p class="text-2xl font-bold">1,255</p>
+            <p class="text-green-600">⬆ 25% vs last month</p>
+        </div>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Twitter Line Chart (Daily Engagement)
+        const twitterLineCtx = document.getElementById('twitterLineChart').getContext('2d');
+        new Chart(twitterLineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Apr', 'May', 'Jun'], // Months for Twitter data
+                datasets: [{
+                    label: 'Daily Engagement',
+                    data: [2000, 5000, 7000], // Twitter daily engagement data
+                    borderColor: 'rgba(29, 161, 242, 1)', // Twitter blue color
+                    borderWidth: 3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Twitter Daily Engagement'
+                    }
+                }
+            }
+        });
+
+        // Twitter Bar Chart (Monthly Engagement)
+        const twitterBarCtx = document.getElementById('twitterBarChart').getContext('2d');
+        new Chart(twitterBarCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for Twitter data
+                datasets: [{
+                    label: 'Engagement',
+                    data: [3000, 4000, 3500, 6000, 8000], // Twitter monthly engagement data
+                    backgroundColor: 'rgba(29, 161, 242, 1)' // Twitter blue color
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Twitter Monthly Engagement'
+                    }
+                }
+            }
+        });
+
+        // Twitter Bar Chart (Likes and Retweets)
+        const twitterLikesRetweetsCtx = document.getElementById('twitterLikesRetweetsChart').getContext('2d');
+        new Chart(twitterLikesRetweetsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Months for Twitter data
+                datasets: [
+                    {
+                        label: 'Likes',
+                        data: [1500, 2000, 2500, 3000, 3500], // Twitter likes data
+                        backgroundColor: 'rgba(255, 99, 132, 1)' // Red color
+                    },
+                    {
+                        label: 'Retweets',
+                        data: [500, 800, 1200, 1500, 2000], // Twitter retweets data
+                        backgroundColor: 'rgba(75, 192, 192, 1)' // Teal color
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Twitter Likes and Retweets'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

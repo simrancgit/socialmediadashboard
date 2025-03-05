@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 text-center text-2xl font-bold shadow-lg">
+        Social Media Dashboard
+    </header>
+    
+    <nav class="p-4 bg-gray-700 text-center">
+        <a href="youtube.html" class="text-red-400 mx-4">YouTube</a>
+        <a href="instagram.html" class="text-pink-400 mx-4">Instagram</a>
+        <a href="facebook.html" class="text-blue-300 mx-4">Facebook</a>
+        <a href="twitter.html" class="text-black-500 mx-4">Twitter</a>
+    </nav>
+    
+    <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="youtube.html" class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all block">
+            <h2 class="text-lg font-semibold">YouTube</h2>
+            <p class="text-3xl font-bold">2,344</p>
+            <p class="text-gray-400">Subscribers</p>
+        </a>
+        <a href="instagram.html" class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all block">
+            <h2 class="text-lg font-semibold">Instagram</h2>
+            <p class="text-3xl font-bold">1,284</p>
+            <p class="text-gray-400">Followers</p>
+        </a>
+        <a href="facebook.html" class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all block">
+            <h2 class="text-lg font-semibold">FACEBOOK</h2>
+            <p class="text-3xl font-bold">1,004</p>
+            <p class="text-gray-400">Followers</p>
+        </a>
+        <a href="twitter.html" class="bg-gray-800 p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all block">
+            <h2 class="text-lg font-semibold">Twitter</h2>
+            <p class="text-3xl font-bold">35,134</p>
+            <p class="text-gray-400">Followers</p>
+        </a>
+    </div>
+
+    <!-- Post Scheduler Section -->
+    <div class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-4">Post Scheduler</h2>
+        <form id="postSchedulerForm" class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <!-- Platform Selection -->
+            <div class="mb-4">
+                <label for="platform" class="block text-lg font-semibold mb-2">Select Platform</label>
+                <select id="platform" name="platform" class="w-full p-2 rounded bg-gray-700 text-white">
+                    <option value="all">All Platforms</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="twitter">Twitter</option>
+                </select>
+            </div>
+
+            <!-- Post Content -->
+            <div class="mb-4">
+                <label for="postContent" class="block text-lg font-semibold mb-2">Post Content</label>
+                <textarea id="postContent" name="postContent" rows="4" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Enter your post content..."></textarea>
+            </div>
+
+            <!-- Date and Time -->
+            <div class="mb-4">
+                <label for="scheduleDateTime" class="block text-lg font-semibold mb-2">Schedule Date & Time</label>
+                <input type="datetime-local" id="scheduleDateTime" name="scheduleDateTime" class="w-full p-2 rounded bg-gray-700 text-white">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-all">Schedule Post</button>
+        </form>
+    </div>
+
+    <!-- Go Back Home Button -->
+    <div class="text-center p-6">
+        <button type="button" class="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all" onclick="window.location.href='home.html'">Go Back Home</button>
+    </div>
+
+    <!-- JavaScript for Form Handling -->
+    <script>
+        document.getElementById('postSchedulerForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form data
+            const platform = document.getElementById('platform').value;
+            const postContent = document.getElementById('postContent').value;
+            const scheduleDateTime = document.getElementById('scheduleDateTime').value;
+
+            // Validate inputs
+            if (!postContent || !scheduleDateTime) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Display confirmation message
+            alert(`Post scheduled for ${platform === 'all' ? 'all platforms' : platform} on ${scheduleDateTime}.\n\nContent: ${postContent}`);
+
+            // Clear form
+            document.getElementById('postSchedulerForm').reset();
+        });
+    </script>
+</body>
+</html>
